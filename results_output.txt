@@ -1,0 +1,74 @@
+============================================================
+BT_02: POS TAGGING TRÊN BROWN CORPUS
+============================================================
+
+[Phase 1] Tải dữ liệu Brown corpus...
+  Tổng số câu       : 57,340
+  Tập huấn luyện    : 45,872 câu  (80%)
+  Tập kiểm thử      : 11,468 câu  (20%)
+  Tổng số token test: 181,546
+
+[Phase 2] Huấn luyện N-gram Backoff Tagger...
+  Thời gian train   : 4.52s
+  Thời gian predict : 0.22s
+
+[Phase 3] Huấn luyện Averaged Perceptron Tagger...
+  Thời gian train   : 68.84s
+  Thời gian predict : 2.33s
+
+============================================================
+[Phase 4] ĐÁNH GIÁ KẾT QUẢ
+============================================================
+
+>>> Tagger 1: N-gram Backoff (Bigram → Unigram → Default)
+------------------------------------------------------------
+              precision    recall  f1-score   support
+
+           .       1.00      1.00      1.00     29083
+         ADJ       0.89      0.86      0.87      9855
+         ADP       0.92      0.88      0.90     18434
+         ADV       0.92      0.86      0.89     10299
+        CONJ       0.98      1.00      0.99      5974
+         DET       0.98      0.97      0.98     20030
+        NOUN       0.91      0.96      0.94     34030
+         NUM       0.87      0.99      0.93      1072
+        PRON       0.97      0.98      0.97     13784
+         PRT       0.76      0.87      0.81      6513
+        VERB       0.98      0.94      0.96     32291
+           X       0.62      0.11      0.19       181
+
+    accuracy                           0.95    181546
+   macro avg       0.90      0.87      0.87    181546
+weighted avg       0.95      0.95      0.95    181546
+
+>>> Tagger 2: Averaged Perceptron Tagger
+------------------------------------------------------------
+              precision    recall  f1-score   support
+
+           .       1.00      1.00      1.00     29083
+         ADJ       0.91      0.91      0.91      9855
+         ADP       0.97      0.97      0.97     18434
+         ADV       0.94      0.93      0.93     10299
+        CONJ       0.99      1.00      0.99      5974
+         DET       0.99      0.99      0.99     20030
+        NOUN       0.96      0.97      0.97     34030
+         NUM       0.90      0.98      0.94      1072
+        PRON       0.99      0.98      0.99     13784
+         PRT       0.95      0.90      0.93      6513
+        VERB       0.98      0.98      0.98     32291
+           X       0.76      0.14      0.23       181
+
+    accuracy                           0.97    181546
+   macro avg       0.94      0.90      0.90    181546
+weighted avg       0.97      0.97      0.97    181546
+
+============================================================
+BẢNG SO SÁNH TỔNG HỢP (Macro Average)
+============================================================
+Tagger                               Precision   Recall   Macro-F1
+------------------------------------------------------------
+N-gram Backoff (Bigram+Unigram)         0.9018   0.8686     0.8693
+Averaged Perceptron                     0.9441   0.8964     0.9022
+============================================================
+
+=> Mô hình tốt hơn (Macro-F1): Averaged Perceptron (0.9022 vs 0.8693)
